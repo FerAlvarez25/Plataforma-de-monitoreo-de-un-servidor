@@ -32,8 +32,9 @@ def procesamiento_main(cola_tareas, cola_resultados, n_cargadores, intensidad, e
         mp.Process(target=cargador_cpu_main, args=(cola_tareas, cola_resultados, intensidad, i))
         for i in range(n_cargadores)
     ]
-    for p in procs:
+    for i, p in enumerate(procs):
         p.start()
+        log_evento(estado, "procesamiento", f"cargador_cpu {i} pid={p.pid} iniciado")
     for p in procs:
         p.join()
     detener.set()
