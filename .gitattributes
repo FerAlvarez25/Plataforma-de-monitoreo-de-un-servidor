@@ -1,0 +1,9 @@
+# Normalización de saltos de línea
+* text=auto
+
+# Scripts que se ejecutarán en WSL2/Linux: siempre LF
+*.sh text eol=lf
+
+# Evidencias binarias (capturas) y PDF no se tocan
+*.png binary
+*.pdf binary
