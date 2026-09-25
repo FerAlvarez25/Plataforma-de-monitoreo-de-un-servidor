@@ -1,7 +1,7 @@
 import time
 
 from ..shared.eventos import log_evento
-from ..shared.registro import conteo_registrado, listar_registros
+from ..shared.registro import conteo_registrado
 
 
 def contar_tipos(estado):
