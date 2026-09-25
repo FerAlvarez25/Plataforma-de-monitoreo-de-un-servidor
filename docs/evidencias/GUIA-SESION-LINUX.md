@@ -102,6 +102,9 @@ ps -eo pid,stat,comm | grep -E "servidor|python"
 ```
 
 Evidencia esperada:
+- **Jerarquía**: el log de eventos registra `componente <rol> pid=<pid> iniciado`
+  para los 5 componentes y `cargador_cpu <i> pid=<pid> iniciado` para los
+  cargadores → correlaciona 1:1 con los PIDs de `pstree -p <admin>`.
 - **Carrera buggy**: `RESUMEN registrados < esperados` (`sync=raza`).
 - **Carrera fix**: `registrados == esperados` (`sync=mutex`).
 - **Interbloqueo**: `expirado` en el log de eventos; en `pstree -p` se ven los dos
