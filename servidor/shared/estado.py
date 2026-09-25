@@ -13,6 +13,18 @@ class EstadoServidor:
         self.lock_registro = mp.Lock()
         self.lock_metricas = mp.Lock()
 
+    def __getstate__(self):
+        # El objeto SyncManager no es picklable bajo spawn: se viaja con las
+        # proxies (registro, contador, ...) que sí lo son. `_manager` solo lo
+        # necesita main.py antes de lanzar los procesos hijos.
+        state = self.__dict__.copy()
+        state.pop("_manager", None)
+        return state
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        self._manager = None
+
 
 def crear_estado():
     return EstadoServidor()
